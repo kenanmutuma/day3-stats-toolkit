@@ -1,0 +1,36 @@
+=== Statistics report: daily_deposits_kes ===
+Rows read         : 40
+Valid values      : 35
+Rejected values   : 5
+  row 7: '' (missing value)
+  row 10: '-' (placeholder, not a number)
+  row 14: 'n/a' (placeholder, not a number)
+  row 25: '12,40O' (not a valid number)
+  row 29: '' (missing value)
+
+                    all data              outliers removed
+count               35                    31
+mean                22,400.00             18,349.65
+median              18,805.47             18,506.72
+mode                none                  none
+variance (sample)   328,019,873.36        10,116,378.52
+std dev (sample)    18,111.32             3,180.63
+min / max           1,200.00 / 96,500.00  12,772.70 / 26,725.69
+Q1 / Q3             15,998.40 / 20,977.21 15,998.40 / 20,730.60
+IQR                 4,978.81              4,732.20
+
+Outlier fences      : lower 8,530.19, upper 28,445.41
+Outliers            : 96,500.00 (2026-09-20, AG-104), 1,200.00 (2026-10-02, AG-104), 88,400.00 (2026-10-06, AG-104), 29,060.99 (2026-10-07, AG-101)
+
+Note for the risk team: 4 daily totals fall outside the fences (3 above 28,445.41 KES and 1 below 8,530.19 KES). The outliers are spread across agents (AG-104 accounts for 3, AG-101 accounts for 1), so the agent with the most of them should be reviewed first. Very high days could be genuine large transactions, structuring or a data-entry error with an extra digit, while very low days could be a float shortage or a missing digit, so each one should be checked against the transaction count and the agent's records before any action is taken.
+
+=== NumPy verification ===
+mean      MATCH
+median    MATCH
+variance  MATCH  (ddof=1)
+std dev   MATCH
+Q1 / Q3   MATCH  (method=linear)
+
+=== Unit tests ===
+Ran 16 tests in 0.012s
+OK
